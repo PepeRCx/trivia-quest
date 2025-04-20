@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:trivia_quest/pages/auth/delete_account.dart';
 import 'package:trivia_quest/pages/home.dart';
-import 'package:trivia_quest/pages/login.dart';
+import 'package:trivia_quest/pages/auth/login.dart';
 
 import 'package:firebase_core/firebase_core.dart';
-import 'package:trivia_quest/pages/signup.dart';
+import 'package:trivia_quest/pages/auth/signup.dart';
 import 'firebase_options.dart';
 
 void main() async {
@@ -28,6 +29,7 @@ class MainApp extends StatelessWidget {
         '/login': (context) => const LoginPage(),
         '/signup': (context) => const SignupPage(),
         '/home': (context) => const HomePage(),
+        '/delete_account': (context) => const DeleteAccountPage(),
       },
     );
   }
