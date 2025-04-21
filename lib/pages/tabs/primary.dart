@@ -21,14 +21,21 @@ class PrimaryTab extends StatelessWidget {
           ),
           SpeedDialChild(
             child: const Icon(Icons.play_arrow_outlined),
-            label: 'Anagram Sorter',
+            label: 'Ball Sorter 2',
             shape: CircleBorder(),
+            onTap: () =>  Navigator.pushNamed(context, '/ball_sorter_2'),
           ),
           SpeedDialChild(
             child: const Icon(Icons.play_arrow_outlined),
-            label: 'Box Selector',
+            label: 'Anagram Sorter',
             shape: CircleBorder(),
-            onTap: () => Navigator.pushNamed(context, '/box_selector'),
+            onTap: () => Navigator.pushNamed(context, '/anagram_sorter'),
+          ),
+          SpeedDialChild(
+            child: const Icon(Icons.bluetooth),
+            label: 'Bluetooth Test',
+            shape: CircleBorder(),
+            onTap: () => Navigator.pushNamed(context, '/bluetooth'),
           )
         ],
       ),
@@ -46,7 +53,7 @@ class PrimaryTab extends StatelessWidget {
                     SizedBox(
                       width: double.infinity,
                       child: CupertinoButton.filled(
-                        child: const Text('Iniciar'),
+                        child: const Text('Iniciar', style: TextStyle(fontSize: 20),),
                         onPressed: () {
                           
                         },

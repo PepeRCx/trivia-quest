@@ -142,6 +142,10 @@ class BluetoothPageState extends State<BluetoothPage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Bluetooth Scanner'),
+        leading: IconButton(
+          onPressed: () => Navigator.pop(context),
+          icon: const Icon(Icons.arrow_back_ios_new),
+        ),
         centerTitle: true,
         backgroundColor: Colors.lightBlue,
       ),
