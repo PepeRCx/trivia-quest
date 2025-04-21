@@ -36,6 +36,12 @@ class PrimaryTab extends StatelessWidget {
             label: 'Bluetooth Test',
             shape: CircleBorder(),
             onTap: () => Navigator.pushNamed(context, '/bluetooth'),
+          ),
+          SpeedDialChild(
+            child: const Icon(Icons.pets),
+            label: 'Panda Party',
+            shape: CircleBorder(),
+            onTap: () => Navigator.pushNamed(context, '/panda_party'),
           )
         ],
       ),
