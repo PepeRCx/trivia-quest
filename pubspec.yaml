@@ -22,3 +22,7 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+
+  assets:
+    - lib/assets/ball_sorter/
+    - lib/assets/ball_sorter/ball_sorter_2/

@@ -47,10 +47,15 @@ class SettingsTabState extends State<SettingsTab> {
                 leading: Icon(Icons.sync, color: Colors.purpleAccent),
               ),
               ListTile(
+                title: const Text('Borrar cuenta'),
+                leading: Icon(Icons.delete, color: Colors.purple),
+                onTap: () => Navigator.pushNamed(context, '/delete_account'),
+              ),
+              ListTile(
                 title: const Text('Cerrar sesión'),
                 leading: Icon(Icons.logout, color: Colors.purpleAccent),
                 onTap: () => _logout(),
-              )
+              ),
             ],
           )
         ],
