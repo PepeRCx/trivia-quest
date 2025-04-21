@@ -15,8 +15,9 @@ class PrimaryTab extends StatelessWidget {
         children: [
           SpeedDialChild(
             child: const Icon(Icons.play_arrow_outlined),
-            label: 'Ball Selector',
+            label: 'Ball Sorter',
             shape: CircleBorder(),
+            onTap: () => Navigator.pushNamed(context, '/ball_sorter'),
           ),
           SpeedDialChild(
             child: const Icon(Icons.play_arrow_outlined),
@@ -27,6 +28,7 @@ class PrimaryTab extends StatelessWidget {
             child: const Icon(Icons.play_arrow_outlined),
             label: 'Box Selector',
             shape: CircleBorder(),
+            onTap: () => Navigator.pushNamed(context, '/box_selector'),
           )
         ],
       ),

@@ -5,6 +5,8 @@ import 'package:trivia_quest/pages/auth/login.dart';
 
 import 'package:firebase_core/firebase_core.dart';
 import 'package:trivia_quest/pages/auth/signup.dart';
+import 'package:trivia_quest/pages/minigames/ball_sorter.dart';
+import 'package:trivia_quest/pages/minigames/box_selector.dart';
 import 'firebase_options.dart';
 
 void main() async {
@@ -30,6 +32,8 @@ class MainApp extends StatelessWidget {
         '/signup': (context) => const SignupPage(),
         '/home': (context) => const HomePage(),
         '/delete_account': (context) => const DeleteAccountPage(),
+        '/ball_sorter': (context) => const BallSorterPage(),
+        '/box_selector': (context) => const BoxSelectorPage(),
       },
     );
   }
