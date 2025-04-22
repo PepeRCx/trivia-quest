@@ -9,6 +9,7 @@ import 'package:trivia_quest/pages/auth/signup.dart';
 import 'package:trivia_quest/pages/minigames/ball_sorter.dart';
 import 'package:trivia_quest/pages/minigames/ball_sorter_2.dart';
 import 'package:trivia_quest/pages/minigames/box_selector.dart';
+import 'package:trivia_quest/pages/minigames/classic_snake.dart';
 import 'package:trivia_quest/pages/minigames/panda_party.dart';
 import 'firebase_options.dart';
 
@@ -41,6 +42,7 @@ class MainApp extends StatelessWidget {
         '/ball_sorter_2': (context) => const BallSorter2ndPage(),
         '/anagram_sorter': (context) => const BoxSelectorPage(),
         '/panda_party': (context) => const PandaPartyPage(),
+        '/classic_snake': (context) => const SnakeGame(),
       },
     );
   }

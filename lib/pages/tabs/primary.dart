@@ -42,7 +42,13 @@ class PrimaryTab extends StatelessWidget {
             label: 'Panda Party',
             shape: CircleBorder(),
             onTap: () => Navigator.pushNamed(context, '/panda_party'),
-          )
+          ),
+          SpeedDialChild(
+            child: const Icon(Icons.line_style),
+            label: 'Classi Snake',
+            shape: CircleBorder(),
+            onTap: () => Navigator.pushNamed(context, '/classic_snake'),
+          ),
         ],
       ),
       body: Center(
