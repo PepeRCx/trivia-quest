@@ -45,7 +45,7 @@ class _SnakeGameState extends State<SnakeGame> {
       const Point(3, 5),
     ];
     food = generateFood();
-    direction = const Point(0, -1);
+    direction = const Point(0, 1);
     isGameOver = false;
     isGameWon = false;
 
@@ -134,6 +134,7 @@ class _SnakeGameState extends State<SnakeGame> {
       body: SizedBox.expand(
         child: Column(
           children: [
+            SizedBox(height: 30),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -215,9 +216,9 @@ class _SnakeGameState extends State<SnakeGame> {
                       if (isGameOver || isGameWon)
                         Center(
                           child: Container(
-                            padding: const EdgeInsets.all(20),
+                            padding: const EdgeInsets.symmetric(horizontal: 60, vertical: 20),
                             decoration: BoxDecoration(
-                              color: const Color.fromARGB(221, 45, 44, 44),
+                              color: const Color.fromARGB(255, 45, 44, 44),
                               borderRadius: BorderRadius.circular(10)
                             ),
                             child: Column(
