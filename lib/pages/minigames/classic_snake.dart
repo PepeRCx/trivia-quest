@@ -208,15 +208,18 @@ class _SnakeGameState extends State<SnakeGame> {
                           height: cellSize,
                           decoration: BoxDecoration(
                             color: Colors.red,
-                            borderRadius: BorderRadius.circular(4),
+                            borderRadius: BorderRadius.circular(7),
                           ),
                         ),
                       ),
                       if (isGameOver || isGameWon)
                         Center(
                           child: Container(
-                            color: Colors.black.withOpacity(0.8),
                             padding: const EdgeInsets.all(20),
+                            decoration: BoxDecoration(
+                              color: const Color.fromARGB(221, 45, 44, 44),
+                              borderRadius: BorderRadius.circular(10)
+                            ),
                             child: Column(
                               mainAxisSize: MainAxisSize.min,
                               children: [
@@ -229,7 +232,10 @@ class _SnakeGameState extends State<SnakeGame> {
                                   onPressed: () {
                                     setState(() => startGame());
                                   },
-                                  child: const Text("Retry"),
+                                  style: ElevatedButton.styleFrom(
+                                    backgroundColor: Colors.white
+                                  ),
+                                  child: const Text("Reiniciar", style: TextStyle(color: Colors.black),),
                                 ),
                               ],
                             ),
