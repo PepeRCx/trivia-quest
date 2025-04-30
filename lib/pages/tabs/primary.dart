@@ -64,11 +64,18 @@ class PrimaryTab extends StatelessWidget {
                     const SizedBox(height: 20),
                     SizedBox(
                       width: double.infinity,
-                      child: CupertinoButton.filled(
-                        child: const Text('Iniciar', style: TextStyle(fontSize: 20),),
-                        onPressed: () {
-                          
-                        },
+                      child: SizedBox(
+                        width: double.infinity,
+                        height: 55,
+                        child: ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: const Color.fromARGB(255, 28, 251, 255)
+                          ),
+                          onPressed: () {
+                            
+                          },
+                          child: const Text('Jugar', style: TextStyle(fontSize: 18, color: Colors.black)),
+                        ),
                       ),
                     ),
                   ],

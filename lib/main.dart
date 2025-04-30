@@ -41,7 +41,7 @@ class MainApp extends StatelessWidget {
         '/ball_sorter': (context) => const BallSorterPage(),
         '/ball_sorter_2': (context) => const BallSorter2ndPage(),
         '/anagram_sorter': (context) => const BoxSelectorPage(),
-        '/panda_party': (context) => const PandaPartyPage(),
+        '/panda_party': (context) => const PandaPartyScreen(),
         '/classic_snake': (context) => const SnakeGame(),
       },
     );

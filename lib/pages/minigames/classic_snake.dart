@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:math';
 import 'package:flutter/material.dart';
+import 'package:audioplayers/audioplayers.dart';
 
 class SnakeGame extends StatefulWidget {
   const SnakeGame({super.key});
@@ -10,6 +11,8 @@ class SnakeGame extends StatefulWidget {
 }
 
 class _SnakeGameState extends State<SnakeGame> {
+  late final AudioPlayer player;
+
   final int rowCount = 20;
   final int columnCount = 20;
   final int winningScore = 10;
@@ -35,6 +38,7 @@ class _SnakeGameState extends State<SnakeGame> {
   @override
   void initState() {
     super.initState();
+    player = AudioPlayer();
     startGame();
   }
 
@@ -51,7 +55,7 @@ class _SnakeGameState extends State<SnakeGame> {
 
     startStopWatch();
 
-    gameLoop = Timer.periodic(const Duration(milliseconds: 200), (_) {
+    gameLoop = Timer.periodic(const Duration(milliseconds: 100), (_) {
       setState(() {
         moveSnake();
       });
@@ -67,10 +71,11 @@ class _SnakeGameState extends State<SnakeGame> {
         rand.nextInt(rowCount),
       );
     } while (snake.contains(newFood));
+    //player.play(AssetSource('lib/assets/snake/eat.wav'));
     return newFood;
   }
 
-  void moveSnake() {
+  Future<void> moveSnake() async {
     final newHead = snake.first + direction;
 
     if (checkCollision(newHead)) {
@@ -83,6 +88,12 @@ class _SnakeGameState extends State<SnakeGame> {
     snake.insert(0, newHead);
 
     if (newHead == food) {
+      print('hello');
+      try {
+        await player.play(AssetSource('snake/eat.wav'));
+      } catch (e) {
+        print('Audio error: $e');
+      }
       food = generateFood();
       if (snake.length - 3 >= winningScore) {
         gameLoop.cancel();
