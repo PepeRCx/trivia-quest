@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:math';
 import 'package:flutter/material.dart';
+import 'package:audioplayers/audioplayers.dart';
 
 class SnakeGame extends StatefulWidget {
   const SnakeGame({super.key});
@@ -10,6 +11,8 @@ class SnakeGame extends StatefulWidget {
 }
 
 class _SnakeGameState extends State<SnakeGame> {
+  late final AudioPlayer player;
+
   final int rowCount = 20;
   final int columnCount = 20;
   final int winningScore = 10;
@@ -35,6 +38,7 @@ class _SnakeGameState extends State<SnakeGame> {
   @override
   void initState() {
     super.initState();
+    player = AudioPlayer();
     startGame();
   }
 
@@ -45,13 +49,13 @@ class _SnakeGameState extends State<SnakeGame> {
       const Point(3, 5),
     ];
     food = generateFood();
-    direction = const Point(0, -1);
+    direction = const Point(0, 1);
     isGameOver = false;
     isGameWon = false;
 
     startStopWatch();
 
-    gameLoop = Timer.periodic(const Duration(milliseconds: 200), (_) {
+    gameLoop = Timer.periodic(const Duration(milliseconds: 100), (_) {
       setState(() {
         moveSnake();
       });
@@ -67,10 +71,11 @@ class _SnakeGameState extends State<SnakeGame> {
         rand.nextInt(rowCount),
       );
     } while (snake.contains(newFood));
+    //player.play(AssetSource('lib/assets/snake/eat.wav'));
     return newFood;
   }
 
-  void moveSnake() {
+  Future<void> moveSnake() async {
     final newHead = snake.first + direction;
 
     if (checkCollision(newHead)) {
@@ -83,6 +88,12 @@ class _SnakeGameState extends State<SnakeGame> {
     snake.insert(0, newHead);
 
     if (newHead == food) {
+      print('hello');
+      try {
+        await player.play(AssetSource('snake/eat.wav'));
+      } catch (e) {
+        print('Audio error: $e');
+      }
       food = generateFood();
       if (snake.length - 3 >= winningScore) {
         gameLoop.cancel();
@@ -134,6 +145,7 @@ class _SnakeGameState extends State<SnakeGame> {
       body: SizedBox.expand(
         child: Column(
           children: [
+            SizedBox(height: 30),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -208,15 +220,18 @@ class _SnakeGameState extends State<SnakeGame> {
                           height: cellSize,
                           decoration: BoxDecoration(
                             color: Colors.red,
-                            borderRadius: BorderRadius.circular(4),
+                            borderRadius: BorderRadius.circular(7),
                           ),
                         ),
                       ),
                       if (isGameOver || isGameWon)
                         Center(
                           child: Container(
-                            color: Colors.black.withOpacity(0.8),
-                            padding: const EdgeInsets.all(20),
+                            padding: const EdgeInsets.symmetric(horizontal: 60, vertical: 20),
+                            decoration: BoxDecoration(
+                              color: const Color.fromARGB(255, 45, 44, 44),
+                              borderRadius: BorderRadius.circular(10)
+                            ),
                             child: Column(
                               mainAxisSize: MainAxisSize.min,
                               children: [
@@ -229,7 +244,10 @@ class _SnakeGameState extends State<SnakeGame> {
                                   onPressed: () {
                                     setState(() => startGame());
                                   },
-                                  child: const Text("Retry"),
+                                  style: ElevatedButton.styleFrom(
+                                    backgroundColor: Colors.white
+                                  ),
+                                  child: const Text("Reiniciar", style: TextStyle(color: Colors.black),),
                                 ),
                               ],
                             ),

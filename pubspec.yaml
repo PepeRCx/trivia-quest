@@ -7,6 +7,7 @@ environment:
   sdk: ^3.7.2
 
 dependencies:
+  audioplayers: ^6.4.0
   firebase_auth: ^5.5.2
   firebase_core: ^3.13.0
   flutter:
@@ -26,3 +27,6 @@ flutter:
   assets:
     - lib/assets/ball_sorter/
     - lib/assets/ball_sorter/ball_sorter_2/
+
+    - assets/snake/
+    - assets/panda_party/
