@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
 
+class MainButton extends StatelessWidget {
+  final VoidCallback? onPressed;
+  final String text;
 
-class main_button extends StatelessWidget {
-  const main_button({
+  const MainButton({
     super.key,
+    required this.onPressed,
+    required this.text,
   });
 
   @override
@@ -17,10 +21,8 @@ class main_button extends StatelessWidget {
           style: ElevatedButton.styleFrom(
             backgroundColor: const Color.fromARGB(255, 28, 251, 255)
           ),
-          onPressed: () {
-            
-          },
-          child: const Text('Jugar', style: TextStyle(fontSize: 18, color: Colors.black)),
+          onPressed: onPressed,
+          child: Text(text, style: TextStyle(fontSize: 18, color: Colors.black)),
         ),
       ),
     );

@@ -63,7 +63,12 @@ class PrimaryTab extends StatelessWidget {
                   children: [
                     const Spacer(),
                     const SizedBox(height: 20),
-                    main_button(),
+                    MainButton(
+                      text: 'Jugar',
+                      onPressed: () {
+                        
+                      },
+                    ),
                   ],
                 ),
               ),
