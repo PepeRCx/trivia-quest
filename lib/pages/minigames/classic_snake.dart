@@ -85,7 +85,7 @@ class _SnakeGameState extends State<SnakeGame> {
     final rand = Random();
     walls.clear();
 
-    final List<Point<int>> possiblePositions = [
+    final List<Point<int>> adjacentPositions = [
       const Point(0, 1),  // Below
       const Point(0, -1), // Above
       const Point(1, 0),  // Right
@@ -100,12 +100,27 @@ class _SnakeGameState extends State<SnakeGame> {
       const Point(0, -2), // 2 Above
     ];
 
-    possiblePositions.shuffle();
+    final List<Point<int>> spacedPositions = [
+      const Point(0, 2),   // 2 Below
+      const Point(0, -2),  // 2 Above
+      const Point(2, 0),   // 2 Right
+      const Point(-2, 0),  // 2 Left
+      const Point(2, 1),   // 2 Right, 1 Below
+      const Point(2, -1),  // 2 Right, 1 Above
+      const Point(-2, 1),  // 2 Left, 1 Below
+      const Point(-2, -1), // 2 Left, 1 Above
+      const Point(1, 2),   // 1 Right, 2 Below
+      const Point(-1, 2),  // 1 Left, 2 Below
+      const Point(1, -2),  // 1 Right, 2 Above
+      const Point(-1, -2), // 1 Left, 2 Above
+    ];
+
+    adjacentPositions.shuffle();
+    spacedPositions.shuffle();
 
     int wallsAdded = 0;
-    for (var offset in possiblePositions) {
-      if (wallsAdded >= wallsPerFruit) break;
-
+    
+    bool tryAddWall(Point<int> offset) {
       final wallPosition = Point(
         foodPosition.x + offset.x,
         foodPosition.y + offset.y,
@@ -116,10 +131,30 @@ class _SnakeGameState extends State<SnakeGame> {
         wallPosition.y >= 0 &&
         wallPosition.y < rowCount &&
         !snake.contains(wallPosition) &&
+        !walls.contains(wallPosition) &&
         wallPosition != foodPosition) {
           walls.add(wallPosition);
+          return true;
+        }
+      return false;
+    }
+
+    while (wallsAdded < wallsPerFruit) {
+      if (rand.nextBool() && spacedPositions.isNotEmpty) {
+        final offset = spacedPositions.removeAt(0);
+        if (tryAddWall(offset)) {
           wallsAdded++;
         }
+      }
+      else if (adjacentPositions.isNotEmpty) {
+        final offset = adjacentPositions.removeAt(0);
+        if (tryAddWall(offset)) {
+          wallsAdded++;
+        }
+      }
+      else if (spacedPositions.isEmpty && adjacentPositions.isEmpty) {
+        break;
+      }
     }
   }
 
