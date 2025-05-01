@@ -19,10 +19,10 @@ class MainButton extends StatelessWidget {
         height: 55,
         child: ElevatedButton(
           style: ElevatedButton.styleFrom(
-            backgroundColor: const Color.fromARGB(255, 28, 251, 255)
+            backgroundColor: Colors.deepPurple
           ),
           onPressed: onPressed,
-          child: Text(text, style: TextStyle(fontSize: 18, color: Colors.black)),
+          child: Text(text, style: TextStyle(fontSize: 18, color: Colors.white)),
         ),
       ),
     );
