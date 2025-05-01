@@ -50,7 +50,7 @@ class HomePageState extends State<HomePage> {
             },
             tabs: const [
               GButton(icon: Icons.home_outlined, text: 'Inicio'),
-              GButton(icon: Icons.favorite_border, text: 'Favorite'),
+              GButton(icon: Icons.favorite_border, text: 'Minijuegos'),
               GButton(icon: Icons.shopping_cart_outlined, text: 'Tienda'),
               GButton(icon: Icons.settings_outlined, text: 'Ajustes'),
             ],
