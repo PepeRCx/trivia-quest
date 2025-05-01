@@ -17,12 +17,15 @@ class _SnakeGameState extends State<SnakeGame> {
   final int columnCount = 20;
   final int winningScore = 10;
 
+  final int wallsPerFruit = 3;
+
   late Timer gameLoop;
   List<Point<int>> snake = [
       const Point(5, 5),
       const Point(4, 5)
     ];
   Point<int> food = const Point(5, 5);
+  List<Point<int>> walls = [];
   Point<int> direction = const Point(0, -1); // Starts moving up
   bool isGameOver = false;
   bool isGameWon = false;
@@ -48,6 +51,7 @@ class _SnakeGameState extends State<SnakeGame> {
       const Point(4, 5),
       const Point(3, 5),
     ];
+    walls = [];
     food = generateFood();
     direction = const Point(0, 1);
     isGameOver = false;
@@ -55,7 +59,7 @@ class _SnakeGameState extends State<SnakeGame> {
 
     startStopWatch();
 
-    gameLoop = Timer.periodic(const Duration(milliseconds: 100), (_) {
+    gameLoop = Timer.periodic(const Duration(milliseconds: 150), (_) {
       setState(() {
         moveSnake();
       });
@@ -71,8 +75,52 @@ class _SnakeGameState extends State<SnakeGame> {
         rand.nextInt(rowCount),
       );
     } while (snake.contains(newFood));
-    //player.play(AssetSource('lib/assets/snake/eat.wav'));
+
+    generateWalls(newFood);
+
     return newFood;
+  }
+
+  void generateWalls(Point<int> foodPosition) {
+    final rand = Random();
+    walls.clear();
+
+    final List<Point<int>> possiblePositions = [
+      const Point(0, 1),  // Below
+      const Point(0, -1), // Above
+      const Point(1, 0),  // Right
+      const Point(-1, 0), // Left
+      const Point(1, 1),  // Bottom-right
+      const Point(-1, 1), // Bottom-left
+      const Point(1, -1), // Top-right
+      const Point(-1, -1), // Top-left
+      const Point(2, 0),  // 2 Right
+      const Point(-2, 0), // 2 Left
+      const Point(0, 2),  // 2 Below
+      const Point(0, -2), // 2 Above
+    ];
+
+    possiblePositions.shuffle();
+
+    int wallsAdded = 0;
+    for (var offset in possiblePositions) {
+      if (wallsAdded >= wallsPerFruit) break;
+
+      final wallPosition = Point(
+        foodPosition.x + offset.x,
+        foodPosition.y + offset.y,
+      );
+
+      if (wallPosition.x >= 0 &&
+        wallPosition.x < columnCount &&
+        wallPosition.y >= 0 &&
+        wallPosition.y < rowCount &&
+        !snake.contains(wallPosition) &&
+        wallPosition != foodPosition) {
+          walls.add(wallPosition);
+          wallsAdded++;
+        }
+    }
   }
 
   Future<void> moveSnake() async {
@@ -110,7 +158,8 @@ class _SnakeGameState extends State<SnakeGame> {
         point.y < 0 ||
         point.x >= columnCount ||
         point.y >= rowCount ||
-        snake.contains(point);
+        snake.contains(point) ||
+        walls.contains(point);
   }
 
   void changeDirection(Point<int> newDir) {
@@ -199,6 +248,22 @@ class _SnakeGameState extends State<SnakeGame> {
                   ),
                   child: Stack(
                     children: [
+                      //Render the walls
+                      for (var wall in walls)
+                        Positioned(
+                          left: wall.x * cellSize,
+                          top: wall.y * cellSize,
+                          child: Container(
+                            width: cellSize,
+                            height: cellSize,
+                            decoration: BoxDecoration(
+                              color: Colors.brown[800],
+                              border: Border.all(color: Colors.black, width: 1),
+                              borderRadius: BorderRadius.circular(2),
+                            ),
+                          ),
+                        ),
+                      //Render the snake
                       for (var p in snake)
                         Positioned(
                           left: p.x * cellSize,
