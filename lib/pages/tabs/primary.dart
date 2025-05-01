@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
+import 'package:trivia_quest/components/main_button.dart';
 
 class PrimaryTab extends StatelessWidget {
   const PrimaryTab({super.key});
@@ -62,22 +63,7 @@ class PrimaryTab extends StatelessWidget {
                   children: [
                     const Spacer(),
                     const SizedBox(height: 20),
-                    SizedBox(
-                      width: double.infinity,
-                      child: SizedBox(
-                        width: double.infinity,
-                        height: 55,
-                        child: ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: const Color.fromARGB(255, 28, 251, 255)
-                          ),
-                          onPressed: () {
-                            
-                          },
-                          child: const Text('Jugar', style: TextStyle(fontSize: 18, color: Colors.black)),
-                        ),
-                      ),
-                    ),
+                    main_button(),
                   ],
                 ),
               ),
